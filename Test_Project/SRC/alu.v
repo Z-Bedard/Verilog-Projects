@@ -12,11 +12,11 @@ module alu(
 //This is comparible to the Architecture in VHDL
 always @(*) begin
     result = 4'b0000;
-    case(sel) //Select operation based on the value of sel
-        2'b00: assign result = a + b;
-        2'b01: assign result = a & b;
-        2'b10: assign result = a | b;
-        
-    endcase
-end
+        case(sel) //Select operation based on the value of sel
+            2'b00: result = a + b; //Add op
+            2'b01: result = a & b; //AND op
+            2'b10: result = a | b; //OR op
+            2'b11: result = a ^ b; //XOR op
+        endcase
+    end
 endmodule

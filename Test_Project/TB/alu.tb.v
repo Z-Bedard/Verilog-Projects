@@ -37,6 +37,9 @@ module alu_tb;
         // Test OR (sel = 10)
         a = 4'b1100; b = 4'b1010; sel = 2'b10; #10;  // 1100 | 1010 = 1110
 
+        //Test XOR (sel = 11)
+        a = 4'b1100; b = 4'b1010; sel = 2'b11; #10;  // 1100 ^ 1010 = 0110
+
         // End simulation
         $finish;
     end
