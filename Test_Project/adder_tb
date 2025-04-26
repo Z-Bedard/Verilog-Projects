@@ -1,0 +1,64 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_000002a6d4799ca0 .scope module, "adder_tb" "adder_tb" 2 8;
+ .timescale -9 -12;
+v000002a6d47e4050_0 .var "a", 1 0;
+v000002a6d47e40f0_0 .var "b", 1 0;
+v000002a6d47e4190_0 .net "sum", 2 0, L_000002a6d47e4370;  1 drivers
+S_000002a6d479a0c0 .scope module, "uut" "adder" 2 16, 3 5 0, S_000002a6d4799ca0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "a";
+    .port_info 1 /INPUT 2 "b";
+    .port_info 2 /OUTPUT 3 "sum";
+v000002a6d479a250_0 .net *"_ivl_0", 2 0, L_000002a6d47e4230;  1 drivers
+L_000002a6d482b848 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v000002a6d4796870_0 .net *"_ivl_3", 0 0, L_000002a6d482b848;  1 drivers
+v000002a6d479bd80_0 .net *"_ivl_4", 2 0, L_000002a6d47e42d0;  1 drivers
+L_000002a6d482b890 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v000002a6d479be20_0 .net *"_ivl_7", 0 0, L_000002a6d482b890;  1 drivers
+v000002a6d479bec0_0 .net "a", 1 0, v000002a6d47e4050_0;  1 drivers
+v000002a6d47e3f10_0 .net "b", 1 0, v000002a6d47e40f0_0;  1 drivers
+v000002a6d47e3fb0_0 .net "sum", 2 0, L_000002a6d47e4370;  alias, 1 drivers
+L_000002a6d47e4230 .concat [ 2 1 0 0], v000002a6d47e4050_0, L_000002a6d482b848;
+L_000002a6d47e42d0 .concat [ 2 1 0 0], v000002a6d47e40f0_0, L_000002a6d482b890;
+L_000002a6d47e4370 .arith/sum 3, L_000002a6d47e4230, L_000002a6d47e42d0;
+    .scope S_000002a6d4799ca0;
+T_0 ;
+    %vpi_call 2 25 "$display", "Time | a b | sum" {0 0 0};
+    %vpi_call 2 28 "$monitor", "%4dns | %b %b | %b", $time, v000002a6d47e4050_0, v000002a6d47e40f0_0, v000002a6d47e4190_0 {0 0 0};
+    %pushi/vec4 0, 0, 2;
+    %store/vec4 v000002a6d47e4050_0, 0, 2;
+    %pushi/vec4 0, 0, 2;
+    %store/vec4 v000002a6d47e40f0_0, 0, 2;
+    %delay 10000, 0;
+    %pushi/vec4 1, 0, 2;
+    %store/vec4 v000002a6d47e4050_0, 0, 2;
+    %pushi/vec4 2, 0, 2;
+    %store/vec4 v000002a6d47e40f0_0, 0, 2;
+    %delay 10000, 0;
+    %pushi/vec4 3, 0, 2;
+    %store/vec4 v000002a6d47e4050_0, 0, 2;
+    %pushi/vec4 1, 0, 2;
+    %store/vec4 v000002a6d47e40f0_0, 0, 2;
+    %delay 10000, 0;
+    %pushi/vec4 2, 0, 2;
+    %store/vec4 v000002a6d47e4050_0, 0, 2;
+    %pushi/vec4 2, 0, 2;
+    %store/vec4 v000002a6d47e40f0_0, 0, 2;
+    %delay 10000, 0;
+    %vpi_call 2 38 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "tb/adder.tb.v";
+    "src/adder.v";
