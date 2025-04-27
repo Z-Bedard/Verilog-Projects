@@ -1,4 +1,5 @@
 Verilog Projects
+
 🎯 Purpose
 This repository contains a collection of Verilog hardware description language (HDL) projects.
 It is intended to support the development of skills in digital logic design, hardware modeling, and simulation-based verification.
