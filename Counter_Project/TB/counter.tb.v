@@ -7,6 +7,7 @@ module counterTest; // Use the already created module
     reg clk;
     reg reset;
     reg enable;
+    reg up_down;
     wire [3:0] count;
 
     //Instantiate the device under test conditions
@@ -14,6 +15,7 @@ module counterTest; // Use the already created module
         .clk(clk),
         .reset(reset),
         .enable(enable),
+        .up_down(up_down),
         .count(count)
     );
 
@@ -26,11 +28,12 @@ module counterTest; // Use the already created module
     // Functionality Test
     initial begin
         // Output all the current values so we can see what's being output
-        $monitor("Time = %0t | clk = %b | reset = %b | enable = %b | count = %b", $time, clk, reset, enable, count);
+        $monitor("Time = %0t | clk = %b | reset = %b | enable = %b | up_down = %b | count = %b", $time, clk, reset, enable, up_down, count);
         
         // Initializing signals
         reset = 1;
         enable = 0;
+        up_down = 1;
 
         #10; // This acts like a cycle delay for 10ns
         reset = 0; //Release the reset function so we can start counting
@@ -46,8 +49,9 @@ module counterTest; // Use the already created module
         enable = 0;
         #30;
 
-        // Start counting again
+        // Start counting again but decend this time
         enable = 1;
+        up_down = 0; 
         #50;
 
         // Reset while it's running
@@ -56,6 +60,7 @@ module counterTest; // Use the already created module
         reset = 0;
 
         // Restart counting
+        up_down = 1;
         #50;
 
         // Terminate sim
