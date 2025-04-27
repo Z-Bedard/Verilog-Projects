@@ -17,8 +17,12 @@ always @(posedge clk or posedge reset) begin
     else if (enable) begin // If enable has been pressed then start counting every clk cycle
         if (up_down)
             count <= count + 1;
-        else
-            count <= count - 1;
+        else begin
+            if (count == 0) // This makes the counter go no lower than 0
+                count <= 0; 
+            else
+                count <= count - 1;
+        end
     end // If enable is now pressed (set to low/0) remain at the current count
 end
 endmodule
