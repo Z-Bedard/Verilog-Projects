@@ -58,6 +58,18 @@ module cpu (
         .result(alu_result) //ALU Output
     )
 
+    // Instantiate ROM
+    instr_mem imem(
+        .addr(pc),  //Addressed by PC
+        .data(instr)    // 8-bit insturction output
+    )
+
+    // Instantiate RAM
+    reg mem_write_data;
+    reg[3:0] mem_addr;
+    reg[7:0] mem_write_data;
+    wire[7:0] mem_read_data;
+
     // Instantiate Data Memory module
     data_mem dmem (
         .clk(clk),
@@ -83,7 +95,24 @@ module cpu (
                     reg_write_en <= 1;
                     reg_write_data <= {4'b0000, imm}; //Zero expend the 4-bit immediate value to 8-bits
                 end
+
+                2'b01: begin //ADD two registers
+                    reg_write_en <= 1;
+                    reg_write_data <= alu_result;
+                end
+
+                2'b10: begin //ADDI Instruction
+                    reg_write_en <= 1;
+                    reg_write_data <= reg_data1 + {4'b0000, imm};
+                end
+
+                2'b11: begin //STORE Instruction
+                    mem_write_en <= 1;
+                    mem_addr <= addr; //Get memory address
+                    mem_write_data <= reg_data1;
+                end
             endcase
+            pc <= pc + 1;
         end
     end
 endmodule
