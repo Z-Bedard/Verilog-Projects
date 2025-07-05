@@ -26,5 +26,6 @@ module instr_mem(
         rom[15] = 8'b00000000;
     end
 
+    //Fetch the instruction
     assign data = rom[addr]; 
 endmodule
